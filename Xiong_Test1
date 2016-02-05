@@ -1,0 +1,49 @@
+#Problem 1:To calculate the perimter of polygon
+def polygperim(coords):
+    """
+     This function is to compute the perimeter of a polygon with its vertex coordinates given
+     
+     Parameters:
+     coords - A list that contains several pair vectors indicating each vertex's coordinate.Be notice that 
+              the vertex coordinates should be shown in list in clockwise or anticlockwise order.
+    """
+    n=len(coords)                  #get the number of the length of the list coords,that is the number of vertice
+    perim=0                        #create a variable perim to store the value of perimeter
+    coords.append(coords[0])       #add the starting vertex's vector to the list to define [x,y](n+1)=[x,y](1)
+    for i in range(n):             #start from the first vertex in the list,calculate the distance between two 
+                                   #adjacent points and then add it to perim
+        perim=perim+((coords[i][0]-coords[i+1][0])**2+(coords[i][1]-coords[i+1][1])**2)**0.5
+    return perim                   #when loop ends, we can get the perimeter of this polygon as return
+    
+    
+#test example:
+#polygperim([(0,0),(2,0),(2,2),(0,2)])
+#8.0
+#polygperim([(0,0),(1,3**0.5),(2,0)])
+#6.0
+
+
+#Problem 2: To calculate the area of polygon
+def polyarea(coords):
+    """
+     This function is to compute the perimeter of a polygon with its vertex coordinates given
+     
+     Parameters:
+     coords - A list that contains several pair vectors indicating each vertex's coordinate.Be notice that 
+              the vertex coordinates should be shown in list in clockwise or anticlockwise order.
+    """
+    n=len(coords)                 #get the number of the length of the list coords,that is the number of vertice
+    area=0                        #create a variable area to store the value of area
+    coords.append(coords[0])      #add the starting vertex's vector to the list to define [x,y](n+1)=[x,y](1)
+    for i in range(n):            #start from the first vertex in the list,calculate the cross product of adjacent 
+                                  #vertice and then add it to variable area,that is sum all these cross products up
+        area=area+(coords[i][0]*coords[i+1][1]-coords[i][1]*coords[i+1][0])
+                                  #this method is based on Green Theorem
+    return abs(area)*0.5          #according to formula for area computing,return this polygon's area value
+
+
+#test example:
+#polygperim([(0,0),(2,0),(2,2),(0,2)])
+#4.0
+#polygperim([(0,0),(1,3**0.5),(2,0)])
+#1.7320508075688772
